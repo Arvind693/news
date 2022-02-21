@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>homepage</title>
+    <link rel="stylesheet" href="index.css">
+    >
+</head>
+<body>
+  
+    <div id="container">
+        <div id="sidebar">
+            <nav>
+                <label class="logo">News</label>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><input type="text" id="search" placeholder="Search An Article"></li>
+                </ul>
+            </nav>   
+          <!--DO NOT CHANGE THIS ID's-->
+          <!--Append the horizontal navbar(sidebar) here only-->
+         
+        </div>
+  
+        <div id="main">
+          <!--DO NOT CHANGE THIS ID's-->
+          <!--Append top headlines from india here only-->
+        </div>
+      </div>
+</body>
+</html>
+<script type="module">
+
+    import {getdata,appenddata} from  "./scripts/append.js"
+     
+    var url = `https://shrouded-earth-23381.herokuapp.com/api/headlines/india`
+    var all_data = await getdata(url)
+    console.log(all_data)
+    var cont = document.getElementById("main")
+
+    appenddata(all_data,cont)
+
+   var input= document.getElementById("search")
+   input.addEventListener("keypress",function(e){
+      if(e.code=="Enter"){
+          let search= document.getElementById("search").value
+          console.log(search)
+
+          localStorage.setItem("search_text",search)
+          window.location.href="search.html"
+      }
+   })
+</script>
